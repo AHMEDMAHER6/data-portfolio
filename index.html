@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahmed Maher | Data Analyst Portfolio</title>
+
+    <!-- Distinctive Fonts: Chakra Petch for Headings (Tech vibe), Exo 2 for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Exo+2:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Chakra Petch"', "sans-serif"],
+              body: ['"Exo 2"', "sans-serif"],
+            },
+            colors: {
+              brand: {
+                blue: "#669BBC",
+                cream: "#FDF0D5",
+                neonGreen: "#39FF14",
+                neonOrange: "#FF5F1F",
+                dark: "#0a0b10",
+                panel: "rgba(15, 23, 42, 0.6)",
+              },
+            },
+            backgroundImage: {
+              "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #0a0b10;
+        color: #fdf0d5;
+        font-family: "Exo 2", sans-serif;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .nav-link {
+        font-family: "Chakra Petch", sans-serif;
+      }
+
+      /* Low-Poly & Geometric Background Elements */
+      .geometric-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        overflow: hidden;
+        background: #0a0b10;
+      }
+
+      .poly-1 {
+        position: absolute;
+        top: -10%;
+        left: -10%;
+        width: 50vw;
+        height: 50vw;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 155, 188, 0.1) 0%,
+          transparent 60%
+        );
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        animation: float-slow 15s ease-in-out infinite alternate;
+      }
+
+      .poly-2 {
+        position: absolute;
+        bottom: -20%;
+        right: -10%;
+        width: 60vw;
+        height: 60vw;
+        background: linear-gradient(
+          315deg,
+          rgba(255, 95, 31, 0.05) 0%,
+          transparent 50%
+        );
+        clip-path: polygon(100% 100%, 0 100%, 100% 0);
+        animation: float-slow 20s ease-in-out infinite alternate-reverse;
+      }
+
+      /* Glassmorphism Utilities */
+      .glass-panel {
+        background: rgba(16, 20, 30, 0.4);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(102, 155, 188, 0.15);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .glass-panel:hover {
+        border-color: rgba(57, 255, 20, 0.4);
+        box-shadow: 0 8px 32px rgba(57, 255, 20, 0.1);
+      }
+
+      .glass-nav {
+        background: rgba(10, 11, 16, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(102, 155, 188, 0.1);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0b10;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #669bbc;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ff5f1f;
+      }
+
+      @keyframes float-slow {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-30px) rotate(5deg);
+        }
+      }
+
+      .accent-text-green {
+        color: #39ff14;
+        text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+      }
+      .accent-text-orange {
+        color: #ff5f1f;
+        text-shadow: 0 0 10px rgba(255, 95, 31, 0.3);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="antialiased selection:bg-brand-neonGreen selection:text-black">
+    <!-- Geometric Background -->
+    <div class="geometric-bg">
+      <div class="poly-1"></div>
+      <div class="poly-2"></div>
+      <div
+        class="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-neonGreen/5 rounded-full filter blur-[100px]"
+      ></div>
+      <div
+        class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-brand-neonOrange/5 rounded-full filter blur-[100px]"
+      ></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between items-center h-24">
+          <a
+            href="#"
+            class="text-3xl font-bold tracking-wider text-brand-cream font-display uppercase hover:scale-105 transition-transform"
+          >
+            Ahmed<span class="accent-text-orange">.</span>
+          </a>
+
+          <div class="hidden md:flex space-x-10 items-center">
+            <a
+              href="#about"
+              class="nav-link text-brand-cream/70 hover:text-brand-neonGreen transition-colors text-sm uppercase tracking-widest font-semibold"
+              >About</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-brand-cream/70 hover:text-brand-neonGreen transition-colors text-sm uppercase tracking-widest font-semibold"
+              >Skills</a
+            >
+            <a
+              href="#projects"
+              class="nav-link text-brand-cream/70 hover:text-brand-neonGreen transition-colors text-sm uppercase tracking-widest font-semibold"
+              >Projects</a
+            >
+            <a
+              href="#education"
+              class="nav-link text-brand-cream/70 hover:text-brand-neonGreen transition-colors text-sm uppercase tracking-widest font-semibold"
+              >Education</a
+            >
+            <a
+              href="#contact"
+              class="px-6 py-2.5 rounded border border-brand-neonOrange text-brand-neonOrange hover:bg-brand-neonOrange hover:text-brand-dark transition-all duration-300 font-display uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(255,95,31,0.2)]"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="pt-32 pb-20 md:pt-48 md:pb-32 min-h-screen flex items-center relative"
+    >
+      <div class="max-w-7xl mx-auto px-6 w-full">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="order-2 lg:order-1 reveal active relative z-10">
+            <div
+              class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-brand-blue/30 bg-brand-blue/10 mb-8 backdrop-blur-sm"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-brand-neonGreen animate-pulse shadow-[0_0_8px_#39FF14]"
+              ></span>
+              <span
+                class="text-sm font-display tracking-widest text-brand-blue uppercase"
+                >Data Analyst</span
+              >
+            </div>
+
+            <h1
+              class="text-5xl md:text-7xl lg:text-8xl font-bold leading-none mb-6 font-display tracking-tight uppercase"
+            >
+              Ahmed <br />
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neonOrange to-brand-blue"
+                >Maher.</span
+              >
+            </h1>
+
+            <p
+              class="text-xl md:text-2xl text-brand-cream/80 mb-10 border-l-2 border-brand-neonGreen pl-6 py-2 font-light"
+            >
+              "Analytical thinking. Data-driven decisions."
+            </p>
+
+            <div class="flex flex-wrap gap-6">
+              <a
+                href="#projects"
+                class="px-8 py-4 bg-brand-cream text-brand-dark font-display font-bold uppercase tracking-wider hover:bg-brand-neonGreen transition-colors duration-300 rounded shadow-[0_0_20px_rgba(253,240,213,0.15)]"
+              >
+                View Dashboard
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ahmed-maher-hegazy-b58303325"
+                target="_blank"
+                class="px-8 py-4 border border-brand-blue/50 text-brand-blue hover:border-brand-neonOrange hover:text-brand-neonOrange font-display font-bold uppercase tracking-wider transition-colors duration-300 rounded backdrop-blur-sm flex items-center gap-3"
+              >
+                <i class="fab fa-linkedin-in"></i> LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="order-1 lg:order-2 flex justify-center lg:justify-end reveal active"
+          >
+            <div class="relative w-72 h-72 md:w-96 md:h-96">
+              <!-- Tech-inspired frame -->
+              <div
+                class="absolute inset-0 border border-brand-blue/30 transform translate-x-4 translate-y-4 rounded-xl"
+              ></div>
+              <div
+                class="absolute inset-0 border border-brand-neonOrange/30 transform -translate-x-4 -translate-y-4 rounded-xl"
+              ></div>
+
+              <div
+                class="relative w-full h-full rounded-xl overflow-hidden border-2 border-brand-cream/10 z-10 bg-brand-dark filter grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
+              >
+                <!-- الصورة الشخصية -->
+                <img
+                  src="PORTFOLIO 2 PH.jpeg"
+                  alt="Ahmed Maher"
+                  class="w-full h-full object-cover object-top scale-105 hover:scale-100 transition-transform duration-700"
+                />
+              </div>
+
+              <!-- Decorative corners -->
+              <div
+                class="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-brand-neonGreen z-20"
+              ></div>
+              <div
+                class="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-brand-neonGreen z-20"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative z-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-12 items-center reveal">
+          <div class="lg:col-span-4">
+            <h2
+              class="text-4xl md:text-5xl font-bold font-display uppercase tracking-widest text-brand-blue mb-4"
+            >
+              About<br />Me<span class="accent-text-orange">.</span>
+            </h2>
+            <div class="w-20 h-1 bg-brand-neonGreen mb-8"></div>
+          </div>
+
+          <div
+            class="lg:col-span-8 glass-panel p-8 md:p-12 rounded-xl relative overflow-hidden"
+          >
+            <i
+              class="fas fa-database absolute -bottom-10 -right-10 text-9xl text-brand-blue/5"
+            ></i>
+            <p
+              class="text-lg md:text-xl text-brand-cream/80 leading-relaxed font-light"
+            >
+              I’m a Data Analyst passionate about turning raw data into clear,
+              actionable insights. I work with
+              <span class="text-brand-neonGreen font-semibold"
+                >SQL, Power BI, Excel, and Python</span
+              >
+              to clean, analyze, and visualize data—transforming complex
+              datasets into meaningful stories that support better decisions.
+              <br /><br />
+              With a strong analytical mindset and a data-driven approach, I
+              excel at solving problems, discovering patterns, and building
+              solutions that create real business value.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative z-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="reveal mb-16">
+          <h2
+            class="text-4xl md:text-5xl font-bold font-display uppercase tracking-widest text-brand-cream mb-4"
+          >
+            Technical & <span class="text-brand-blue">Soft Skills</span>
+          </h2>
+          <div class="w-20 h-1 bg-brand-neonOrange"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+          <!-- Category 1 -->
+          <div
+            class="glass-panel p-8 rounded-xl border-t-4 border-t-brand-neonGreen group"
+          >
+            <i
+              class="fas fa-laptop-code text-3xl mb-6 accent-text-green group-hover:scale-110 transition-transform"
+            ></i>
+            <h3
+              class="text-xl font-display font-bold uppercase tracking-wider mb-6 text-brand-cream"
+            >
+              Tools & Tech
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-neonGreen text-xs"></i>
+                SQL
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-neonGreen text-xs"></i>
+                Power BI
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-neonGreen text-xs"></i>
+                Excel
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-neonGreen text-xs"></i>
+                Python
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 2 -->
+          <div
+            class="glass-panel p-8 rounded-xl border-t-4 border-t-brand-blue group"
+          >
+            <i
+              class="fas fa-filter text-3xl mb-6 text-brand-blue drop-shadow-[0_0_10px_rgba(102,155,188,0.5)] group-hover:scale-110 transition-transform"
+            ></i>
+            <h3
+              class="text-xl font-display font-bold uppercase tracking-wider mb-6 text-brand-cream"
+            >
+              Processing
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-blue text-xs"></i> ETL
+                Processes
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-blue text-xs"></i> Data
+                Cleaning
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-blue text-xs"></i> Data
+                Wrangling
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 3 -->
+          <div
+            class="glass-panel p-8 rounded-xl border-t-4 border-t-brand-neonOrange group"
+          >
+            <i
+              class="fas fa-project-diagram text-3xl mb-6 accent-text-orange group-hover:scale-110 transition-transform"
+            ></i>
+            <h3
+              class="text-xl font-display font-bold uppercase tracking-wider mb-6 text-brand-cream"
+            >
+              Modeling
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-neonOrange text-xs"></i>
+                Relational Modeling
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-neonOrange text-xs"></i>
+                Star Schema
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 4 -->
+          <div
+            class="glass-panel p-8 rounded-xl border-t-4 border-t-brand-cream group"
+          >
+            <i
+              class="fas fa-chart-pie text-3xl mb-6 text-brand-cream drop-shadow-[0_0_10px_rgba(253,240,213,0.5)] group-hover:scale-110 transition-transform"
+            ></i>
+            <h3
+              class="text-xl font-display font-bold uppercase tracking-wider mb-6 text-brand-cream"
+            >
+              Visualization
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-cream text-xs"></i>
+                Dashboards
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-cream text-xs"></i>
+                Visual Storytelling
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-cream text-xs"></i>
+                UI/UX Design
+              </li>
+              <li class="flex items-center gap-3 text-brand-cream/70">
+                <i class="fas fa-angle-right text-brand-cream text-xs"></i>
+                Color Harmony
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative z-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="reveal mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+        >
+          <div>
+            <h2
+              class="text-4xl md:text-5xl font-bold font-display uppercase tracking-widest text-brand-cream mb-4"
+            >
+              Featured <span class="text-brand-neonOrange">Projects</span>
+            </h2>
+            <div class="w-20 h-1 bg-brand-neonGreen"></div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 reveal">
+          <!-- Project 1 -->
+          <div
+            class="glass-panel rounded-xl overflow-hidden group flex flex-col h-full border border-brand-blue/20"
+          >
+            <!-- Thumbnail Image -->
+            <div
+              class="relative h-48 overflow-hidden border-b border-brand-blue/20"
+            >
+              <div
+                class="absolute inset-0 bg-brand-dark/20 z-10 group-hover:bg-transparent transition-colors duration-500"
+              ></div>
+              <img
+                src="superstore copy.png"
+                alt="Superstore Sales Project Thumbnail"
+                class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 filter brightness-90 group-hover:brightness-110"
+              />
+              <div
+                class="absolute top-4 right-4 z-20 px-3 py-1 bg-brand-neonGreen/90 text-brand-dark text-xs font-bold font-display uppercase tracking-wider rounded"
+              >
+                Analytics
+              </div>
+            </div>
+
+            <div class="p-8 flex flex-col flex-grow">
+              <h3
+                class="text-2xl font-display font-bold uppercase tracking-wider mb-2 text-brand-cream group-hover:text-brand-neonGreen transition-colors"
+              >
+                Superstore Sales
+              </h3>
+              <p
+                class="text-brand-blue text-sm font-semibold tracking-widest uppercase mb-4"
+              >
+                End-to-End Analytics
+              </p>
+
+              <p
+                class="text-brand-cream/60 text-sm mb-6 flex-grow border-l-2 border-brand-blue/30 pl-4"
+              >
+                An end-to-end data analytics project showcasing the full data
+                lifecycle.
+              </p>
+
+              <div class="space-y-4">
+                <div
+                  class="bg-black/30 p-4 rounded border border-brand-cream/5"
+                >
+                  <h4
+                    class="text-xs font-display text-brand-neonOrange uppercase tracking-widest mb-2"
+                  >
+                    <i class="fas fa-terminal mr-2"></i>Contributions
+                  </h4>
+                  <p class="text-xs text-brand-cream/70 leading-relaxed">
+                    Executed data cleaning and ETL processes via Power Query,
+                    structured a Star Schema data model with complex DAX
+                    measures.
+                  </p>
+                </div>
+                <div
+                  class="bg-black/30 p-4 rounded border border-brand-cream/5"
+                >
+                  <h4
+                    class="text-xs font-display text-brand-neonGreen uppercase tracking-widest mb-2"
+                  >
+                    <i class="fas fa-chart-line mr-2"></i>Impact
+                  </h4>
+                  <p class="text-xs text-brand-cream/70 leading-relaxed">
+                    Designed an interactive, visually cohesive dashboard
+                    focusing heavily on UI/UX to track KPIs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div
+            class="glass-panel rounded-xl overflow-hidden group flex flex-col h-full border border-brand-blue/20"
+          >
+            <!-- Thumbnail Image -->
+            <div
+              class="relative h-48 overflow-hidden border-b border-brand-blue/20"
+            >
+              <div
+                class="absolute inset-0 bg-brand-dark/20 z-10 group-hover:bg-transparent transition-colors duration-500"
+              ></div>
+              <img
+                src="adidas copy.png"
+                alt="Adidas Sales Performance Project Thumbnail"
+                class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 filter brightness-90 group-hover:brightness-110"
+              />
+              <div
+                class="absolute top-4 right-4 z-20 px-3 py-1 bg-brand-neonOrange/90 text-brand-dark text-xs font-bold font-display uppercase tracking-wider rounded"
+              >
+                Commercial
+              </div>
+            </div>
+
+            <div class="p-8 flex flex-col flex-grow">
+              <h3
+                class="text-2xl font-display font-bold uppercase tracking-wider mb-2 text-brand-cream group-hover:text-brand-neonOrange transition-colors"
+              >
+                Adidas Sales
+              </h3>
+              <p
+                class="text-brand-blue text-sm font-semibold tracking-widest uppercase mb-4"
+              >
+                Performance Tracking
+              </p>
+
+              <p
+                class="text-brand-cream/60 text-sm mb-6 flex-grow border-l-2 border-brand-blue/30 pl-4"
+              >
+                Designed a dynamic dashboard to analyze Adidas's sales
+                performance across various dimensions.
+              </p>
+
+              <div class="space-y-4">
+                <div
+                  class="bg-black/30 p-4 rounded border border-brand-cream/5"
+                >
+                  <h4
+                    class="text-xs font-display text-brand-neonOrange uppercase tracking-widest mb-2"
+                  >
+                    <i class="fas fa-terminal mr-2"></i>Contributions
+                  </h4>
+                  <p class="text-xs text-brand-cream/70 leading-relaxed">
+                    Aggregated and structured sales data to enable
+                    multidimensional analysis. Created interactive
+                    visualizations by product, region, and method.
+                  </p>
+                </div>
+                <div
+                  class="bg-black/30 p-4 rounded border border-brand-cream/5"
+                >
+                  <h4
+                    class="text-xs font-display text-brand-neonGreen uppercase tracking-widest mb-2"
+                  >
+                    <i class="fas fa-chart-line mr-2"></i>Impact
+                  </h4>
+                  <p class="text-xs text-brand-cream/70 leading-relaxed">
+                    Empowered stakeholders to identify top products and optimize
+                    regional strategies and sales channels.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="glass-panel rounded-xl overflow-hidden group flex flex-col h-full border border-brand-blue/20"
+          >
+            <!-- Thumbnail Image -->
+            <div
+              class="relative h-48 overflow-hidden border-b border-brand-blue/20"
+            >
+              <div
+                class="absolute inset-0 bg-brand-dark/20 z-10 group-hover:bg-transparent transition-colors duration-500"
+              ></div>
+              <img
+                src="KickStarter Copy.png"
+                alt="Kickstarter Campaign Analysis Project Thumbnail"
+                class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 filter brightness-90 group-hover:brightness-110"
+              />
+              <div
+                class="absolute top-4 right-4 z-20 px-3 py-1 bg-brand-blue/90 text-brand-dark text-xs font-bold font-display uppercase tracking-wider rounded"
+              >
+                Trends
+              </div>
+            </div>
+
+            <div class="p-8 flex flex-col flex-grow">
+              <h3
+                class="text-2xl font-display font-bold uppercase tracking-wider mb-2 text-brand-cream group-hover:text-brand-blue transition-colors"
+              >
+                Kickstarter
+              </h3>
+              <p
+                class="text-brand-blue text-sm font-semibold tracking-widest uppercase mb-4"
+              >
+                Success Predictors
+              </p>
+
+              <p
+                class="text-brand-cream/60 text-sm mb-6 flex-grow border-l-2 border-brand-blue/30 pl-4"
+              >
+                Analyzed historical Kickstarter data to uncover patterns
+                contributing to funding success or failure.
+              </p>
+
+              <div class="space-y-4">
+                <div
+                  class="bg-black/30 p-4 rounded border border-brand-cream/5"
+                >
+                  <h4
+                    class="text-xs font-display text-brand-neonOrange uppercase tracking-widest mb-2"
+                  >
+                    <i class="fas fa-terminal mr-2"></i>Contributions
+                  </h4>
+                  <p class="text-xs text-brand-cream/70 leading-relaxed">
+                    Processed a vast dataset of campaigns. Visualized key
+                    metrics such as funding goals, pledged amounts, and backers
+                    count.
+                  </p>
+                </div>
+                <div
+                  class="bg-black/30 p-4 rounded border border-brand-cream/5"
+                >
+                  <h4
+                    class="text-xs font-display text-brand-neonGreen uppercase tracking-widest mb-2"
+                  >
+                    <i class="fas fa-chart-line mr-2"></i>Impact
+                  </h4>
+                  <p class="text-xs text-brand-cream/70 leading-relaxed">
+                    Delivered actionable insights into optimal campaign
+                    durations, popular categories, and goal correlation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 relative z-10">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="reveal text-center mb-16">
+          <h2
+            class="text-4xl md:text-5xl font-bold font-display uppercase tracking-widest text-brand-cream mb-4"
+          >
+            Education & <span class="text-brand-blue">Certifications</span>
+          </h2>
+          <div class="w-20 h-1 bg-brand-neonOrange mx-auto"></div>
+        </div>
+
+        <div
+          class="relative border-l-2 border-brand-blue/30 ml-4 md:ml-8 space-y-12 pb-8 reveal"
+        >
+          <!-- Item 1 -->
+          <div class="relative pl-8 md:pl-12">
+            <div
+              class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-brand-neonGreen shadow-[0_0_10px_#39FF14]"
+            ></div>
+            <div
+              class="glass-panel p-6 md:p-8 rounded-xl group border border-brand-blue/20"
+            >
+              <span
+                class="text-xs font-display font-bold uppercase tracking-widest text-brand-neonGreen mb-3 block"
+                >Ongoing</span
+              >
+              <h3
+                class="text-2xl font-bold font-display uppercase tracking-wider text-brand-cream mb-1 group-hover:text-brand-neonGreen transition-colors"
+              >
+                Data Analytics Trainee
+              </h3>
+              <p
+                class="text-brand-blue font-semibold tracking-wider text-sm mb-4"
+              >
+                Digital Egypt Pioneers Initiative (DEPI)
+              </p>
+              <p class="text-brand-cream/70 text-sm font-light">
+                Intensive government initiative focusing on advanced data
+                analytics skills.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="relative pl-8 md:pl-12">
+            <div
+              class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-brand-neonOrange shadow-[0_0_10px_#FF5F1F]"
+            ></div>
+            <div
+              class="glass-panel p-6 md:p-8 rounded-xl group border border-brand-blue/20"
+            >
+              <span
+                class="text-xs font-display font-bold uppercase tracking-widest text-brand-neonOrange mb-3 block"
+                >Completed</span
+              >
+              <h3
+                class="text-2xl font-bold font-display uppercase tracking-wider text-brand-cream mb-1 group-hover:text-brand-neonOrange transition-colors"
+              >
+                Data Fundamentals Certification
+              </h3>
+              <p
+                class="text-brand-blue font-semibold tracking-wider text-sm mb-4"
+              >
+                IBM SkillsBuild
+              </p>
+              <p class="text-brand-cream/70 text-sm font-light">
+                Core concepts of data analysis and data lifecycle.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="relative pl-8 md:pl-12">
+            <div
+              class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-brand-blue"
+            ></div>
+            <div
+              class="glass-panel p-6 md:p-8 rounded-xl group border border-brand-blue/20"
+            >
+              <span
+                class="text-xs font-display font-bold uppercase tracking-widest text-brand-blue mb-3 block"
+                >2024 - 2029</span
+              >
+              <h3
+                class="text-2xl font-bold font-display uppercase tracking-wider text-brand-cream mb-1 group-hover:text-brand-blue transition-colors"
+              >
+                Bachelor of Engineering
+              </h3>
+              <p
+                class="text-brand-blue font-semibold tracking-wider text-sm mb-4"
+              >
+                Mechatronics Department
+              </p>
+              <p class="text-brand-cream/70 text-sm font-light">
+                Equipped with advanced analytical and mathematical
+                problem-solving foundations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer / Contact Section -->
+    <footer
+      id="contact"
+      class="relative z-10 border-t border-brand-blue/20 bg-black/50 pt-20 pb-10"
+    >
+      <div class="max-w-7xl mx-auto px-6 reveal">
+        <div class="grid md:grid-cols-2 gap-12 mb-16">
+          <div>
+            <h2
+              class="text-4xl font-bold font-display uppercase tracking-widest text-brand-cream mb-8"
+            >
+              Let's <span class="text-brand-neonGreen">Connect.</span>
+            </h2>
+            <p
+              class="text-brand-cream/60 mb-8 max-w-md font-light leading-relaxed"
+            >
+              Ready to transform raw data into actionable business value? I'm
+              currently open for new opportunities and exciting data challenges.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="https://www.linkedin.com/in/ahmed-maher-hegazy-b58303325"
+                target="_blank"
+                class="w-12 h-12 rounded-full border border-brand-blue/50 flex items-center justify-center text-brand-cream hover:bg-brand-blue hover:border-transparent transition-all hover:scale-110"
+              >
+                <i class="fab fa-linkedin-in text-lg"></i>
+              </a>
+              <a
+                href="mailto:ahmadhegazy84@gmail.com"
+                class="w-12 h-12 rounded-full border border-brand-neonOrange/50 flex items-center justify-center text-brand-cream hover:bg-brand-neonOrange hover:border-transparent transition-all hover:scale-110"
+              >
+                <i class="fas fa-envelope text-lg"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div
+              class="glass-panel border border-brand-blue/20 p-6 rounded-xl flex items-center gap-6"
+            >
+              <div
+                class="w-12 h-12 bg-brand-neonGreen/10 rounded flex items-center justify-center"
+              >
+                <i class="fas fa-envelope accent-text-green text-xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs font-display uppercase tracking-widest text-brand-cream/50 mb-1"
+                >
+                  Email
+                </p>
+                <a
+                  href="mailto:ahmadhegazy84@gmail.com"
+                  class="text-brand-cream hover:text-brand-neonGreen transition-colors break-all font-semibold"
+                  >ahmadhegazy84@gmail.com</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="glass-panel border border-brand-blue/20 p-6 rounded-xl flex items-center gap-6"
+            >
+              <div
+                class="w-12 h-12 bg-brand-neonOrange/10 rounded flex items-center justify-center"
+              >
+                <i class="fas fa-phone-alt accent-text-orange text-xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs font-display uppercase tracking-widest text-brand-cream/50 mb-1"
+                >
+                  Phone
+                </p>
+                <a
+                  href="tel:+201094927011"
+                  class="text-brand-cream hover:text-brand-neonOrange transition-colors font-semibold"
+                  dir="ltr"
+                  >+20 109 492 7011</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="glass-panel border border-brand-blue/20 p-6 rounded-xl flex items-center gap-6"
+            >
+              <div
+                class="w-12 h-12 bg-brand-blue/10 rounded flex items-center justify-center"
+              >
+                <i
+                  class="fas fa-map-marker-alt text-brand-blue text-xl drop-shadow-[0_0_8px_rgba(102,155,188,0.5)]"
+                ></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs font-display uppercase tracking-widest text-brand-cream/50 mb-1"
+                >
+                  Location
+                </p>
+                <p class="text-brand-cream font-semibold">Benha, Egypt</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="text-center border-t border-brand-blue/20 pt-8 text-brand-cream/40 text-sm font-display tracking-widest"
+        >
+          &copy; <span id="year"></span> AHMED MAHER. DESIGNED FOR DATA.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Set current year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Scroll Animation Observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".reveal").forEach((element) => {
+        observer.observe(element);
+      });
+    </script>
+  </body>
+</html>
